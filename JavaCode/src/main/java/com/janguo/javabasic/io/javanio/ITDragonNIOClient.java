@@ -1,4 +1,4 @@
-package com.janguo.javanio;
+package com.janguo.javabasic.io.javanio;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -6,7 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
 public class ITDragonNIOClient {
-    private final static int PORT = 8888;
+    private final static int PORT = 8899;
     private final static int BUFFER_SIZE = 1024;
     private final static String IP_ADDRESS = "127.0.0.1";
     public static void main(String[] args) {

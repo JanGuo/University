@@ -1,4 +1,4 @@
-package com.janguo.javanio;
+package com.janguo.javabasic.io.javanio;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -10,7 +10,7 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
 public class ITDragonNIOServer implements Runnable{
-    /*
+    /**
      * NIO 也称 New IO， Non-Block IO，非阻塞同步通信方式
      * 从BIO的阻塞到NIO的非阻塞，这是一大进步。功归于Buffer，Channel，Selector三个设计实现。
      * Buffer   ：  缓冲区。NIO的数据操作都是在缓冲区中进行。缓冲区实际上是一个数组。而BIO是将数据直接写入或读取到Stream对象。
@@ -40,7 +40,7 @@ public class ITDragonNIOServer implements Runnable{
             // 4. 绑定端口
             channel.socket().bind(new InetSocketAddress(PORT));
             // 5. 把通道注册到多路复用器上，并监听阻塞事件
-            /*
+            /**
              * SelectionKey.OP_READ   : 表示关注读数据就绪事件
              * SelectionKey.OP_WRITE  : 表示关注写数据就绪事件
              * SelectionKey.OP_CONNECT: 表示关注socket channel的连接完成事件
@@ -87,7 +87,6 @@ public class ITDragonNIOServer implements Runnable{
                     if (key.isReadable()){
                         read(key);
                     }
-
                 }
             } catch (IOException e) {
                 e.printStackTrace();
