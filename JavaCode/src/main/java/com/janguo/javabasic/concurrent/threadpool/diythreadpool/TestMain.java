@@ -4,9 +4,11 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 
 public class TestMain {
-    public static void main(String[] args) {
-//        SimpleThreadPool threadPool = new SimpleThreadPool();
-        MySelfPool threadPool = new MySelfPool();
+    public static void main(String[] args) throws InterruptedException {
+        SimpleThreadPool threadPool = new SimpleThreadPool(10,100,() -> {
+            throw new DiscardException("Discard this task");
+        });
+//        MySelfPool threadPool = new MySelfPool();
 
         IntStream.rangeClosed(0, 40).forEach(i -> {
             threadPool.submit(() -> {
@@ -19,5 +21,8 @@ public class TestMain {
                 Optional.of("The Runnable: "+i+Thread.currentThread().getName() + "结束服务！").ifPresent(System.out::println);
             });
         });
+
+        Thread.sleep(30_000);
+        threadPool.shutdown();
     }
 }

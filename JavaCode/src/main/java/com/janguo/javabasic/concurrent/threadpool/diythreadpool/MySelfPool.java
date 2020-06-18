@@ -35,6 +35,10 @@ public class MySelfPool {
 
     public MySelfPool() {
         this(SIZE);
+    }
+
+    public MySelfPool(int poolSize) {
+        this.poolSize = poolSize;
         init();
     }
 
@@ -52,10 +56,6 @@ public class MySelfPool {
             QUEUE.addLast(runnable);
             QUEUE.notifyAll();
         }
-    }
-
-    public MySelfPool(int poolSize) {
-        this.poolSize = poolSize;
     }
 
     private enum ThreadState {
