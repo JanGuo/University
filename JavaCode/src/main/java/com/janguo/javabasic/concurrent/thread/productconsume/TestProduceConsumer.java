@@ -2,7 +2,7 @@ package com.janguo.javabasic.concurrent.thread.productconsume;
 
 import java.util.stream.Stream;
 
-public class Test {
+public class TestProduceConsumer {
 
     private int i = 0;
     private boolean isProduced = false;
@@ -10,34 +10,32 @@ public class Test {
 
     public void product() throws InterruptedException {
         synchronized (LOCK) {
-            if (!isProduced) {
-                i++;
-                System.out.println("Produce: " + i);
-                LOCK.notify();
-                isProduced = true;
-            } else {
+            while (isProduced) {
                 LOCK.wait();
             }
+            i++;
+            System.out.println("Produce: " + i);
+            LOCK.notifyAll();
+            isProduced = true;
         }
     }
 
     public void consumer() throws InterruptedException {
         synchronized (LOCK) {
-            if (isProduced){
-                System.out.println("Consumer : " +i);
-                isProduced = false;
-                LOCK.notify();
-            }else {
+            while (!isProduced) {
                 LOCK.wait();
             }
+            System.out.println("Consumer : " + i);
+            isProduced = false;
+            LOCK.notifyAll();
         }
     }
 
     public static void main(String[] args) {
-        Test test = new Test();
+        TestProduceConsumer test = new TestProduceConsumer();
 
-        Stream.of("P1","P2").forEach(n->{
-            new Thread(){
+        Stream.of("P1", "P2","P3","P4").forEach(n -> {
+            new Thread(n) {
                 @Override
                 public void run() {
                     while (true) {
@@ -51,8 +49,8 @@ public class Test {
             }.start();
         });
 
-        Stream.of("T1","T2").forEach(n->{
-            new Thread(){
+        Stream.of("T1", "T2","T3","T4").forEach(n -> {
+            new Thread(n) {
                 @Override
                 public void run() {
                     while (true) {

@@ -2,10 +2,7 @@ package com.janguo.javabasic.concurrent.threadpool.diythreadpool;
 
 import lombok.SneakyThrows;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * 1. 任务队列 -> 用于存放等待执行的任务
@@ -33,62 +30,129 @@ import java.util.Optional;
  * - 添加任务到队列中
  * - 通知其他处于等待状态的线程 执行任务
  */
-public class SimpleThreadPool {
-    private final int SIZE;
+public class SimpleThreadPool extends Thread {
 
+    // 线程池当前线程个数
+    private int size;
+
+    // 待提交任务队列 大小
     private final int QUEUE_SIZE;
 
+    // 默认线程池大小 废弃
     private final static int DEFAULT_SIZE = 10;
 
-    private final static int DEFAULT_TASK_QUEUE_SIZE = 2000;
+    // 最小线程池大小
+    private int min;
 
+    //
+    private int active;
+
+    // 最大线程池个数
+    private int max;
+
+    // 默认任务队列大小
+    private final static int DEFAULT_TASK_QUEUE_SIZE = 200;
+
+    // 线程名 后缀
     private volatile int seq = 0;
 
+    // 线程名前缀
     private final static String THREAD_PREFIX = "Simple_Thread_Pool-";
 
+    // 线程 默认线程组
     private final static ThreadGroup GROUP = new ThreadGroup("Pool_Group");
 
+    // 任务队列
     private final static LinkedList<Runnable> TASK_QUEUE = new LinkedList<>();
 
+    // 线程 存放数组
     private final static List<WorKThread> THREAD_QUEUE = new ArrayList<>();
 
+    // 拒绝策略
     private final DiscardPolicy discardPolicy;
 
+    // 是否销毁
     private volatile boolean destroy = false;
 
     public SimpleThreadPool() {
-        this(DEFAULT_SIZE, DEFAULT_TASK_QUEUE_SIZE, () -> {
+        this(4, 8, 12, DEFAULT_TASK_QUEUE_SIZE, () -> {
             throw new DiscardException("Discard this task");
         });
     }
 
-    public SimpleThreadPool(int size, int queueSize, DiscardPolicy discardPolicy) {
+    public SimpleThreadPool(int min, int active, int max, int queueSize, DiscardPolicy discardPolicy) {
         this.discardPolicy = discardPolicy;
-        this.SIZE = size;
+        this.min = min;
+        this.active = active;
+        this.max = max;
         this.QUEUE_SIZE = queueSize;
         init();
     }
 
-    public int getSIZE() {
-        return SIZE;
+    @Override
+    public void run() {
+        while (!destroy) {
+            System.out.printf("Pool#MIN: [%d] ,Active: [%d] ,MAX: [%d] ,此线程池线程个数: [%d] ,当前QueueSize中: [%d] \n",
+                    this.min, this.active, this.max, this.size, TASK_QUEUE.size());
+            try {
+                Thread.sleep(10_000);
+                if (TASK_QUEUE.size() > active && size < active) {
+                    for (int i = size; i < active; i++) {
+                        creatWorkThread();
+                    }
+                    size = active;
+                    System.out.println("以扩充线程池大小到" + size);
+                } else if (TASK_QUEUE.size() > max && size < max) {
+                    for (int i = size; i < max; i++) {
+                        creatWorkThread();
+                    }
+                    size = max;
+                    System.out.println("以扩充线程池大小到" + size);
+                }
+                if (TASK_QUEUE.isEmpty() && size > active) {
+                     synchronized (THREAD_QUEUE) {
+                        int releaseSize = size - active;
+
+                        for (Iterator<WorKThread> iterator = THREAD_QUEUE.iterator(); iterator.hasNext(); ) {
+                            if (releaseSize <= 0) break;
+                            WorKThread worKThread = iterator.next();
+
+                            if (worKThread.taskState != TaskState.RUNNING) {
+                                worKThread.close();
+                                worKThread.interrupt();
+                                iterator.remove();
+                                releaseSize--;
+                            }// 如果是运行状态 什么都不做 那么THREAD_QUEUE中 还是会有未关闭的线程
+                            // 可以使用ThreadGroup来处理
+                            System.out.println("FOM FOR GROUP中的线程数"+GROUP.activeCount());
+                        }
+                        size = active;
+                        System.out.println("缩小线程池大小到" + size);
+                    }
+                }
+                System.out.println("GROUP中的线程数"+GROUP.activeCount());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    public int getQUEUE_SIZE() {
-        return QUEUE_SIZE;
-    }
-
-    public boolean destroy() {
+    public boolean isDestroy() {
         return this.destroy;
     }
 
     private void init() {
-        for (int i = 0; i < SIZE; i++) {
+        for (int i = 0; i < this.min; i++) {
             creatWorkThread();
         }
+
+        this.size = this.min;
+        this.start();
+
     }
 
     public void submit(Runnable runnable) {
-        if (destroy){
+        if (destroy) {
             throw new IllegalStateException("The Pool has destroy can't submit");
         }
         synchronized (TASK_QUEUE) {
@@ -109,23 +173,49 @@ public class SimpleThreadPool {
         while (!TASK_QUEUE.isEmpty()) {
             Thread.sleep(100);
         }
+        synchronized (THREAD_QUEUE){
 
-        int initVal = THREAD_QUEUE.size();
-        while (initVal > 0) {
-            for (WorKThread task : THREAD_QUEUE) {
-                if (task.getTaskState() == TaskState.BLOCKED) {
-                    task.interrupt();
-                    task.close();
-                    initVal--;
-                } else {
-                    Thread.sleep(100);
+            int initVal = THREAD_QUEUE.size();
+            while (initVal > 0) {
+                //synchronized (TASK_QUEUE){
+                for (WorKThread task : THREAD_QUEUE) {
+                    if (task.getTaskState() == TaskState.BLOCKED) {
+                        task.interrupt();
+                        task.close();
+                        initVal--;
+                        System.out.println("FROM SHUTDOWN GROUP中的线程数"+GROUP.activeCount());
+                    } else {
+                        Thread.sleep(100);
+                    }
                 }
-            }
+        }
+
+            //}
         }
         Optional.of("The thread pool disposed!").ifPresent(System.out::println);
         this.destroy = true;
     }
 
+
+    public int getSize() {
+        return size;
+    }
+
+    public int getQUEUE_SIZE() {
+        return QUEUE_SIZE;
+    }
+
+    public int getMin() {
+        return min;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
+    public int getMax() {
+        return max;
+    }
 
     private enum TaskState {
         FREE, RUNNING, BLOCKED, DEAD
