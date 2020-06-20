@@ -9,7 +9,7 @@ import java.util.concurrent.FutureTask;
 public class TestCallable {
     public static void main(String[] args) {
 
-        CallableDemo callableDemo = new CallableDemo();
+        CallableDemo  callableDemo = new CallableDemo();
         FutureTask<Integer> result = new FutureTask<>(callableDemo);
         new Thread(result).start();
         try {
