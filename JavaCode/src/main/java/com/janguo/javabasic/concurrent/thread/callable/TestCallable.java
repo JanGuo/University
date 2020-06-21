@@ -2,6 +2,7 @@ package com.janguo.javabasic.concurrent.thread.callable;
 
 import org.omg.PortableInterceptor.INACTIVE;
 
+import java.util.HashMap;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
