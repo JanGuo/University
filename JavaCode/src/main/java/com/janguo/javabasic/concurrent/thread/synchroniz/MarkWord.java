@@ -4,6 +4,9 @@ import org.openjdk.jol.info.ClassLayout;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 查看对象头信息
+ */
 public class MarkWord {
 
     static final Lock LOCK = new Lock();
