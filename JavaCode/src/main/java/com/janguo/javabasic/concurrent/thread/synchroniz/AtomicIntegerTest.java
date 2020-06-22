@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ *
+ */
 public class AtomicIntegerTest {
     private static AtomicInteger m = new AtomicInteger(0);
 

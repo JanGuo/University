@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Eg From 《Java并发编程的艺术》
+ * CAS --自旋锁---  AtomicInteger原子操作
  */
 public class AtomicIntegerTest2 {
     public static void main(String[] args) {
