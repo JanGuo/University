@@ -1,6 +1,5 @@
-package com.janguo.javabasic.concurrent.atomic.field;
+package com.janguo.javabasic.concurrent.atomic.fieldupdater;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;

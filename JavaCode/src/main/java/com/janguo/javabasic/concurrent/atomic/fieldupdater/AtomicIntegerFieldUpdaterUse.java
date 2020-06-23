@@ -1,4 +1,4 @@
-package com.janguo.javabasic.concurrent.atomic.field;
+package com.janguo.javabasic.concurrent.atomic.fieldupdater;
 
 import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 
