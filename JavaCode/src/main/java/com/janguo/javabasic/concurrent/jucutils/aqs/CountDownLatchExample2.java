@@ -33,9 +33,11 @@ public class CountDownLatchExample2 {
             try {
                 TimeUnit.SECONDS.sleep(4);
                 System.out.println(Thread.currentThread().getName()+"---Down All Mission! For Other Thread!");
-                latch.countDown();
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }finally {
+                latch.countDown();
             }
 
         }).start();
