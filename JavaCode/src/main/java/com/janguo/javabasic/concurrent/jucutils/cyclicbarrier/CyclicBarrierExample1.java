@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  *
  * 1. CountDownLatch 不能 reset， 二CyclicBarrier是可以循环使用的额
  * 2. CountDownLatch 工作线程之间不会相互关心， CyclicBarrier 工作线程必须等到同一个共同的点才会继续去执行某个动作
- *          见eg3 构造函数中传入了 Runnable任务
+ *          见eg2 构造函数中传入了 Runnable任务
  */
 public class CyclicBarrierExample1 {
     public static void main(String[] args) throws BrokenBarrierException, InterruptedException {
