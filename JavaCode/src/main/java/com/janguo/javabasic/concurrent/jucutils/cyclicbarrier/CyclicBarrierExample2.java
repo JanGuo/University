@@ -1,4 +1,4 @@
-package com.janguo.javabasic.concurrent.jucutils.barrier;
+package com.janguo.javabasic.concurrent.jucutils.cyclicbarrier;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
