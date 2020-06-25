@@ -1,4 +1,4 @@
-package com.janguo.javabasic.concurrent.concurrentbook;
+package com.janguo.javabasic.concurrent.concurrentbook.chapter4;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;
