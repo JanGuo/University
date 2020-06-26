@@ -4,6 +4,9 @@ import java.util.Random;
 import java.util.concurrent.Phaser;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 循环使用
+ */
 public class PhaserExample2 {
     private final static Random r = new Random(System.currentTimeMillis());
     public static void main(String[] args) {
