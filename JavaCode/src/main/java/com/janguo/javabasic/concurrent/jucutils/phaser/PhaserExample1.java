@@ -5,6 +5,9 @@ import java.util.concurrent.Phaser;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
+/**
+ * 动态增加
+ */
 public class PhaserExample1 {
     private static final Random r = new Random(System.currentTimeMillis());
     public static void main(String[] args) {
