@@ -46,7 +46,8 @@ public class BoundedQueue<T> {
             if (++removeIndex == items.length)
                 removeIndex = 0;
             --count;
-            notFull.signalAll();
+//            notFull.signalAll();
+            notFull.signal();
             return (T) x;
         } finally {
             lock.unlock();
