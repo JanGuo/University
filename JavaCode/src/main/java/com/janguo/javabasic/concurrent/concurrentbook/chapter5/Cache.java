@@ -9,6 +9,14 @@ import java.util.stream.IntStream;
 
 /**
  * 读写锁
+ * 读写锁将 变量切分成了两个部分，高16位表示读，低16位表示写， 好像改变了实现方式 没仔细看
+ *
+ * 获取写锁的时候必须保证所有的读锁都已经释放
+ *      为了保证写之后对所有的读，都可见
+ * 获取到写锁之后，所有的读锁都必须等待，写锁的释放
+ *
+ *
+ * 读锁是一个支持重进入的共享锁
  */
 public class Cache {
     static Map<String,Object> map = new HashMap<>();
