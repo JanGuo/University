@@ -46,7 +46,9 @@ public class BoundedQueue<T> {
             if (++removeIndex == items.length)
                 removeIndex = 0;
             --count;
+            //相当于对等待队列中的每个节点均执行一次signal()方法， 果就是将等待队列中所有节点全部移动到同步队列中，并唤醒每个节点的线程。
 //            notFull.signalAll();
+            // 将会唤醒在等待队列中等待时间最长的节点(首节点)，在唤醒节点（LockSupport）之前，会将节点移到同步队列中。
             notFull.signal();
             return (T) x;
         } finally {
