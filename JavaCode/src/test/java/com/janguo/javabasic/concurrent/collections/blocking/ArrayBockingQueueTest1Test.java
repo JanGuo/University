@@ -193,6 +193,7 @@ public class ArrayBockingQueueTest1Test {
 
 //      * Retrieves and removes the head of this queue,
 //      * or returns {@code null} if this queue is empty.
+        // @throws NoSuchElementException if this queue is empty
         assertThat(queue.remove(), equalTo(null));
     }
 
