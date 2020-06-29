@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Struct;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Executors;
@@ -141,6 +143,7 @@ public class ArrayBockingQueueTest1Test {
         fail("Should Not Process to here.");
 
     }
+
     @Test
     public void testElementMethodQueue() {
         ArrayBlockingQueue<Object> queue = example.creat(5);
@@ -151,7 +154,7 @@ public class ArrayBockingQueueTest1Test {
         //     * differs from {@link #peek peek} only in that it throws an exception if
         //     * this queue is empty.
         assertThat(queue.element(), equalTo("Hello1"));
-        assertThat(queue.size(),equalTo(3));
+        assertThat(queue.size(), equalTo(3));
     }
 
     @Test
@@ -221,6 +224,28 @@ public class ArrayBockingQueueTest1Test {
 
         queue.clear();
         assertThat(queue.size(), equalTo(0));
+
+    }
+
+    @Test
+    public void testDrainToMethodQueue() {
+        ArrayBlockingQueue<String> queue = example.creat(5);
+        assertThat(queue.add("Hello1"), equalTo(true));
+        assertThat(queue.add("Hello2"), equalTo(true));
+        assertThat(queue.add("Hello3"), equalTo(true));
+        assertThat(queue.add("Hello4"), equalTo(true));
+
+        assertThat(queue.size(), equalTo(4));
+
+        assertThat(queue.remainingCapacity(), equalTo(1));
+        assertThat(queue.remove(), equalTo("Hello1"));
+        assertThat(queue.remainingCapacity(), equalTo(2));
+
+        List<String> list = new ArrayList<>();
+        queue.drainTo(list);
+
+
+        assertThat(list.size(), equalTo(3));
 
     }
 
