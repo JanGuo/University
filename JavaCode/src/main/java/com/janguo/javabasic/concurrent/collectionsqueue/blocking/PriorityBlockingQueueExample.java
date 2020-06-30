@@ -1,4 +1,4 @@
-package com.janguo.javabasic.concurrent.collections.blocking;
+package com.janguo.javabasic.concurrent.collectionsqueue.blocking;
 
 import java.util.Comparator;
 import java.util.concurrent.PriorityBlockingQueue;

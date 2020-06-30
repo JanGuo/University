@@ -1,4 +1,4 @@
-package com.janguo.javabasic.concurrent.collections.diy;
+package com.janguo.javabasic.concurrent.collectionsqueue.diy;
 
 
 import java.util.NoSuchElementException;

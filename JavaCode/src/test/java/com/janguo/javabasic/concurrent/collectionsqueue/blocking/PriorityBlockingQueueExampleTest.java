@@ -1,4 +1,4 @@
-package com.janguo.javabasic.concurrent.collections.blocking;
+package com.janguo.javabasic.concurrent.collectionsqueue.blocking;
 
 import org.junit.After;
 import org.junit.Before;

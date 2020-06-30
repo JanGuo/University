@@ -1,8 +1,5 @@
-package com.janguo.javabasic.concurrent.collections.diy;
+package com.janguo.javabasic.concurrent.collectionsqueue.diy;
 
-import javax.lang.model.type.ArrayType;
-import java.util.Arrays;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 public class PriorityLinkList<E extends Comparable<E>> {
