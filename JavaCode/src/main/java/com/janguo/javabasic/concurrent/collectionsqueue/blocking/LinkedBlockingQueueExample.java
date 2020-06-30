@@ -2,6 +2,9 @@ package com.janguo.javabasic.concurrent.collectionsqueue.blocking;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * 底层 LinkedList 可选有无边界
+ */
 public class LinkedBlockingQueueExample {
 
     public <T> LinkedBlockingQueue<T> creat() {
