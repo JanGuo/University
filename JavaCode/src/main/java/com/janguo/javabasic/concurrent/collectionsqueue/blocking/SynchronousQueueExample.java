@@ -7,10 +7,12 @@ import java.util.concurrent.SynchronousQueue;
  *  * A {@linkplain BlockingQueue blocking queue} in which each insert
  *  * operation must wait for a corresponding remove operation by another
  *  * thread, and vice versa.
+ *
+ *  需要学  Transferer<E>
  */
 public class SynchronousQueueExample {
 
-    public <T> SynchronousQueue<T> creat() {
+    public static <T> SynchronousQueue<T> creat() {
         return new SynchronousQueue<T>();
     }
 }
