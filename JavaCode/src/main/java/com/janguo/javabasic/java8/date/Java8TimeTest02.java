@@ -20,5 +20,16 @@ public class Java8TimeTest02 {
         System.out.println(localDateTime);
 
 
+
+        LocalDate date1 = LocalDate.now();
+        LocalDate date2 = LocalDate.of(2011, 11, 20);
+
+        System.out.println(date1.isAfter(date2));
+        System.out.println(date2.isBefore(date1));
+
+        System.out.println(!date2.isEqual(date1));
+
+        System.out.println(!date2.equals(date1));
+
     }
 }
