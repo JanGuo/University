@@ -1,0 +1,58 @@
+plugins {
+    id 'java'
+    id 'com.google.protobuf' version '0.8.8'
+}
+
+group 'janguo.io'
+version '1.0-SNAPSHOT'
+
+repositories {
+    // mavenCentral()
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+    jcenter()
+    google ()
+}
+
+dependencies {
+    testCompile(
+            "junit:junit:4.12"
+    )
+    compile(
+            "io.netty:netty-all:4.1.50.Final",
+            "com.google.protobuf:protobuf-java:3.11.0",
+            "com.google.protobuf:protobuf-java-util:3.11.0",
+            "org.apache.thrift:libthrift:0.13.0",
+            "io.grpc:grpc-netty-shaded:1.29.0",
+            "io.grpc:grpc-protobuf:1.29.0",
+            "io.grpc:grpc-stub:1.29.0",
+            "org.slf4j:slf4j-api:1.7.10",
+            "org.slf4j:slf4j-log4j12:1.7.10"
+    )
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.11.0"
+        //path = '/usr/local/bin/protoc'
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.29.0'
+        }
+    }
+    generatedFilesBaseDir = "$projectDir/src/"
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {
+                outputSubDir = 'java'
+            }
+        }
+    }
+}
+//task(runMain, dependsOn: 'classes', type: JavaExec) {
+//    main = 'com.janguo.nio.NioClient'
+//    classpath = sourceSets.main.runtimeClasspath
+//    args 'CodeTutr'
+//}
