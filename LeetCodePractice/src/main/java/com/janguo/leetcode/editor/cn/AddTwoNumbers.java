@@ -46,10 +46,15 @@ public class AddTwoNumbers {
 
         ListNode listNode = solution.addTwoNumbers(head1.next, head2.next);
 
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("[");
         while (listNode != null) {
-            System.out.print(listNode.val + "->");
+            buffer.append(listNode.val).append(",");
             listNode = listNode.next;
         }
+        buffer.replace(buffer.length()-1,buffer.length(),"]");
+
+        System.out.println(buffer);
 
     }
 
