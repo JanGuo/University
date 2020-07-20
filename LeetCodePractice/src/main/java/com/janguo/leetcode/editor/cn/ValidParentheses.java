@@ -86,6 +86,7 @@ public class ValidParentheses {
             }
             return stack.isEmpty();
         }
+        
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
