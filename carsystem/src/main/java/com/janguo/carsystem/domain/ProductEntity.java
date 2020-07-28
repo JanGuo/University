@@ -1,10 +1,13 @@
 package com.janguo.carsystem.domain;
 
+import lombok.Data;
+
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @javax.persistence.Entity
 @javax.persistence.Table(name = "product", schema = "carsystem", catalog = "")
+@Data
 public class ProductEntity {
     // 产品编号
     private String productId;
