@@ -33,4 +33,15 @@ class SupplierServiceImplTest {
 
         assertTrue(supplierService.addSupplier(supplier));
     }
+
+    @Test
+    void getSupplierById() {
+        System.out.println(supplierService.getSupplierById("1"));
+    }
+
+    @Test
+    void getSupplierByName() {
+        System.out.println(supplierService.getSupplierByName("阳光汽车零件批发"));
+
+    }
 }

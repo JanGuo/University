@@ -22,4 +22,14 @@ public class SupplierServiceImpl implements SupplierService {
     public boolean addSupplier(SupplierEntity supplier) {
         return supplierDao.addSupplier(supplier);
     }
+
+    @Override
+    public SupplierEntity getSupplierById(String id) {
+        return supplierDao.getSupplierById(id);
+    }
+
+    @Override
+    public SupplierEntity getSupplierByName(String name) {
+        return supplierDao.getSupplierByName(name);
+    }
 }

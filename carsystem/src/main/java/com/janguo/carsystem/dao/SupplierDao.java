@@ -24,4 +24,12 @@ public interface SupplierDao {
     @Insert("insert into supplier(supplier_id,supplier_name,supplier_address,supplier_tel,supplier_bank,supplier_bank_id,supplier_remark)" +
             "values(#{supplierId},#{supplierName},#{supplierAddress},#{supplierTel},#{supplierBank},#{supplierBankId},#{supplierRemark})")
     boolean addSupplier(SupplierEntity supplier);
+
+    @ResultMap("supplier")
+    @Select("select * from supplier where supplier_id=#{id}")
+    SupplierEntity getSupplierById(String id);
+
+    @ResultMap("supplier")
+    @Select("select * from supplier where supplier_name=#{name}")
+    SupplierEntity getSupplierByName(String name);
 }
