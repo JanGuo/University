@@ -62,7 +62,6 @@ class ProductServiceImplTest {
         Instant instant = localDateTime1.atZone(zoneId).toInstant();
 
         Date date = Date.from(instant);
-        long dateTime = date.getTime();
-        System.out.println(productService.getAllProductTimeDownValue(new Timestamp(dateTime)));
+        System.out.println(productService.getAllProductTimeDownValue(new Timestamp(date.getTime())));
     }
 }
