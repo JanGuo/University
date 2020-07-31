@@ -1,15 +1,18 @@
 package com.janguo.carsystem.domain;
 
+import lombok.Data;
+
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @javax.persistence.Entity
 @javax.persistence.Table(name = "stock", schema = "carsystem", catalog = "")
+@Data
 public class StockEntity {
     // 采购单编号
     private String stockId;
     // 供应商编号
-    private String victualerId;
+    private String supplierId;
     // 采购单细节编号
     private String stockDetail;
     // 采购单时间
@@ -18,7 +21,7 @@ public class StockEntity {
     private Timestamp deliveryDate;
     // 办理人编号
     private String transactorId;
-    // 采购单 交易金额
+    // 采购单 交易金额   ------------  double  会不会有问题？？？
     private Double stockMoney;
 
     @javax.persistence.Id
@@ -33,12 +36,12 @@ public class StockEntity {
 
     @javax.persistence.Basic
     @javax.persistence.Column(name = "victualer_ID")
-    public String getVictualerId() {
-        return victualerId;
+    public String getSupplierId() {
+        return supplierId;
     }
 
-    public void setVictualerId(String victualerId) {
-        this.victualerId = victualerId;
+    public void setSupplierId(String victualerId) {
+        this.supplierId = victualerId;
     }
 
     @javax.persistence.Basic
@@ -97,7 +100,7 @@ public class StockEntity {
         if (o == null || getClass() != o.getClass()) return false;
         StockEntity that = (StockEntity) o;
         return Objects.equals(stockId, that.stockId) &&
-                Objects.equals(victualerId, that.victualerId) &&
+                Objects.equals(supplierId, that.supplierId) &&
                 Objects.equals(stockDetail, that.stockDetail) &&
                 Objects.equals(stockDate, that.stockDate) &&
                 Objects.equals(deliveryDate, that.deliveryDate) &&
@@ -107,6 +110,6 @@ public class StockEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(stockId, victualerId, stockDetail, stockDate, deliveryDate, transactorId, stockMoney);
+        return Objects.hash(stockId, supplierId, stockDetail, stockDate, deliveryDate, transactorId, stockMoney);
     }
 }
