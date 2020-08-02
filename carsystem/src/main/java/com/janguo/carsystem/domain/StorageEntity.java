@@ -1,9 +1,13 @@
 package com.janguo.carsystem.domain;
 
+import lombok.Data;
+
+import javax.annotation.security.DenyAll;
 import java.util.Objects;
 
 @javax.persistence.Entity
 @javax.persistence.Table(name = "storage", schema = "carsystem", catalog = "")
+@Data
 public class StorageEntity {
     // 仓库编号
     private String storageId;
