@@ -3,6 +3,7 @@ package com.janguo.javabasic.concurrent.collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ConcurrentHashMapVSSkipListMap {
 
@@ -33,11 +34,12 @@ public class ConcurrentHashMapVSSkipListMap {
 
         for (int i = 0; i < 5; i++) {
             long startTime = System.nanoTime();
+            final AtomicInteger counter = new AtomicInteger(0);
             map.clear();
             ExecutorService executorService = Executors.newFixedThreadPool(threadNumber);
             for (int j = 0; j < threadNumber; j++) {
                 executorService.execute(() -> {
-                    for (int x = 0; x < MAX_THRESHOLD; x++) {
+                    for (int x = 0; x < MAX_THRESHOLD && counter.getAndIncrement() > MAX_THRESHOLD; x++) {
                         Integer randomNumber = (int) Math.ceil(Math.random() * 600_000);
                         map.get(String.valueOf(randomNumber));
                         map.put(String.valueOf(randomNumber), randomNumber);
