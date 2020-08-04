@@ -1,5 +1,7 @@
 package com.janguo.carsystem.domain;
 
+import lombok.Data;
+
 import java.util.Objects;
 
 /**
@@ -7,7 +9,11 @@ import java.util.Objects;
  */
 @javax.persistence.Entity
 @javax.persistence.Table(name = "order_detail", schema = "carsystem", catalog = "")
+@Data
 public class OrderDetailEntity {
+
+    // 订单细节编号
+    private String orderDetailId;
     // 订单编号
     private String orderId;
     // 产品编号

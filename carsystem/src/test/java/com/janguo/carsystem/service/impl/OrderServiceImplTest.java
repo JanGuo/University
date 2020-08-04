@@ -1,5 +1,6 @@
 package com.janguo.carsystem.service.impl;
 
+import com.janguo.carsystem.domain.OrderDetailEntity;
 import com.janguo.carsystem.domain.OrderEntity;
 import com.janguo.carsystem.service.OrderService;
 import org.junit.jupiter.api.Test;
@@ -12,8 +13,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
-import java.time.LocalDate;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,6 +21,7 @@ class OrderServiceImplTest {
 
     @Autowired
     OrderService orderService;
+
     @Test
     void testGetAllOrder() {
         System.out.println(orderService.getAllOlder());
@@ -49,13 +49,26 @@ class OrderServiceImplTest {
         long expiredDateLong = expiredDate111.getTime();
         Timestamp expiredTimestamp = new Timestamp(expiredDateLong);
 
-        orderEntity.setOrderId("3");
+        orderEntity.setOrderId("4");
         orderEntity.setCustomerId("1");
         orderEntity.setOrderDate(nowTimestamp);
         orderEntity.setDeliveryDate(expiredTimestamp);
-        orderEntity.setOrderDetail("2530");
+        orderEntity.setOrderDetail("1");
         orderEntity.setOrderMoney(1000d);
         orderEntity.setTransactorId("10");
-        assertTrue(orderService.addOrder(orderEntity));
+
+        OrderDetailEntity orderDetailEntity = new OrderDetailEntity();
+        orderDetailEntity.setOrderDetailId("1");
+        orderDetailEntity.setOrderId(orderEntity.getOrderId());
+        orderDetailEntity.setProductId("json");
+        orderDetailEntity.setOrderNumber(100);
+        orderDetailEntity.setOrderMoney(orderEntity.getOrderMoney());
+
+        assertTrue(orderService.addOrderAndDetail(orderEntity, orderDetailEntity));
+    }
+
+    @Test
+    void addOrderAndDetailById() {
+        System.out.println(orderService.getOrderAndDetailById("4"));
     }
 }

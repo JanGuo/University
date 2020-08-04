@@ -23,4 +23,8 @@ public interface OrderDao {
     @ResultMap("order")
     @Insert("insert into order1(order_id,customer_id,order_detail,order_date,delivery_date,transactor_id,order_money) values(#{orderId},#{customerId},#{orderDetail},#{orderDate},#{deliveryDate},#{transactorId},#{orderMoney})")
     boolean addOrder(OrderEntity orderEntity);
+
+    @ResultMap("order")
+    @Select("select * from order1 where order_id=#{id}")
+    OrderEntity getOlderById(String id);
 }

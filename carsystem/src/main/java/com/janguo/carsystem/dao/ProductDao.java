@@ -6,6 +6,9 @@ import org.apache.ibatis.annotations.*;
 import java.sql.Timestamp;
 import java.util.List;
 
+/**
+ * @see ProductEntity
+ */
 @Mapper
 public interface ProductDao {
     @Results(id = "product", value = {
