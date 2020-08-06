@@ -11,14 +11,16 @@ import java.util.List;
 @Mapper
 public interface OrderDetailDao {
     /**
-     * // 订单编号
-     * private String orderId;
-     * // 产品编号
-     * private String productId;
-     * // 订单数目
-     * private Integer orderNumber;
-     * // 订单总价值
-     * private Double orderMoney;
+     // 订单细节编号
+     private String orderDetailId;
+     // 订单编号
+     private String orderId;
+     // 产品编号
+     private String productId;
+     // 订单数目
+     private Integer orderNumber;
+     // 订单总价值
+     private Double orderMoney;
      */
 
     @Results(id = "order_detail", value = {
