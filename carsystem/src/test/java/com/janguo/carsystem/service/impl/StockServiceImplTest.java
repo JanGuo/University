@@ -77,4 +77,8 @@ class StockServiceImplTest {
     }
 
 
+    @Test
+    void getAllStockInformation() {
+        System.out.println(stockService.getAllStockInformation("1"));
+    }
 }
