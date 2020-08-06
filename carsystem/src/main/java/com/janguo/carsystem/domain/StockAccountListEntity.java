@@ -1,5 +1,7 @@
 package com.janguo.carsystem.domain;
 
+import lombok.Data;
+
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -8,6 +10,7 @@ import java.util.Objects;
  */
 @javax.persistence.Entity
 @javax.persistence.Table(name = "stock_account_list", schema = "carsystem", catalog = "")
+@Data
 public class StockAccountListEntity {
     // 采购单编号
     private String stockId;

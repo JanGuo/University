@@ -1,13 +1,18 @@
 package com.janguo.carsystem.domain;
 
+import lombok.Data;
+
 import java.util.Objects;
 
 /**
  * 采购单细节
  */
-@javax.persistence.Entity
+//@javax.persistence.Entity
 @javax.persistence.Table(name = "stock_detail", schema = "carsystem", catalog = "")
+@Data
 public class StockDetailEntity {
+    // 采购单细节编号
+    private String stockDetailId;
     // 采购单编号
     private String stockId;
     // 产品编号
