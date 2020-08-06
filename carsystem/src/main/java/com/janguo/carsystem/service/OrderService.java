@@ -11,5 +11,7 @@ public interface OrderService {
 
     boolean addOrderAndDetail(OrderEntity orderEntity, OrderDetailEntity orderDetailEntity);
 
+    boolean addOrderAndDetail(OrderInformation orderInformation, String orderDetailId);
+
     OrderInformation getOrderAndDetailById(String id);
 }

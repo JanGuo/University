@@ -3,6 +3,8 @@ package com.janguo.carsystem.service.impl;
 import com.janguo.carsystem.domain.OrderDetailEntity;
 import com.janguo.carsystem.domain.OrderEntity;
 import com.janguo.carsystem.service.OrderService;
+import com.janguo.carsystem.vo.OrderInformation;
+import com.janguo.carsystem.vo.StockInformation;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -68,7 +70,25 @@ class OrderServiceImplTest {
     }
 
     @Test
+    void addOrderAndDetail() {
+
+        OrderInformation orderInformation = new OrderInformation();
+        orderInformation.setOrderId("5");
+        orderInformation.setDeliveryDate(new Timestamp(System.currentTimeMillis()));
+        orderInformation.setProductId("json");
+        orderInformation.setOrderDate(new Timestamp(System.currentTimeMillis()));
+        orderInformation.setOrderNumber(101);
+        orderInformation.setOrderMoney(45000d);
+        orderInformation.setTransactorId("1");
+        orderInformation.setCustomerId("3");
+
+        orderService.addOrderAndDetail(orderInformation, "2");
+    }
+
+    @Test
     void addOrderAndDetailById() {
         System.out.println(orderService.getOrderAndDetailById("4"));
     }
+
+
 }
