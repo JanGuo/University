@@ -40,6 +40,34 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
+    public boolean addOrderAndDetail(OrderInformation orderInformation, String orderDetailId) {
+        OrderEntity orderEntity = new OrderEntity();
+        OrderDetailEntity orderDetailEntity = new OrderDetailEntity();
+
+
+        orderDetailEntity.setOrderDetailId(orderDetailId);
+        orderDetailEntity.setOrderId(orderInformation.getOrderId());
+        orderDetailEntity.setProductId(orderInformation.getProductId());
+        orderDetailEntity.setOrderMoney(orderInformation.getOrderMoney());
+        orderDetailEntity.setOrderNumber(orderInformation.getOrderNumber());
+
+
+        orderEntity.setOrderId(orderInformation.getOrderId());
+        orderEntity.setOrderDetail(orderDetailId);
+        orderEntity.setOrderMoney(orderInformation.getOrderMoney());
+        orderEntity.setDeliveryDate(orderInformation.getDeliveryDate());
+        orderEntity.setTransactorId(orderInformation.getTransactorId());
+        orderEntity.setOrderDate(orderInformation.getOrderDate());
+        orderEntity.setCustomerId(orderInformation.getCustomerId());
+
+        boolean add1 = orderDao.addOrder(orderEntity);
+
+        boolean add2 = orderDetailDao.addOrderDetail(orderDetailEntity);
+        return add1 && add2;
+    }
+
+    @Override
     public OrderInformation getOrderAndDetailById(String id) {
         OrderEntity older = orderDao.getOlderById(id);
 
