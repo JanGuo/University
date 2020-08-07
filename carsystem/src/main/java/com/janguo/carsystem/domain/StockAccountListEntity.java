@@ -19,7 +19,7 @@ public class StockAccountListEntity {
     // 支付日期
     private Timestamp stockMoneyDate;
     // 已付金额
-    private Double havepayMoney;
+    private Double havePayMoney;
     //办理人编号
     private String transactorId;
 
@@ -55,12 +55,12 @@ public class StockAccountListEntity {
 
     @javax.persistence.Basic
     @javax.persistence.Column(name = "havepay_money")
-    public Double getHavepayMoney() {
-        return havepayMoney;
+    public Double getHavePayMoney() {
+        return havePayMoney;
     }
 
-    public void setHavepayMoney(Double havepayMoney) {
-        this.havepayMoney = havepayMoney;
+    public void setHavePayMoney(Double havepayMoney) {
+        this.havePayMoney = havepayMoney;
     }
 
     @javax.persistence.Basic
@@ -81,12 +81,12 @@ public class StockAccountListEntity {
         return Objects.equals(stockId, that.stockId) &&
                 Objects.equals(stockMoney, that.stockMoney) &&
                 Objects.equals(stockMoneyDate, that.stockMoneyDate) &&
-                Objects.equals(havepayMoney, that.havepayMoney) &&
+                Objects.equals(havePayMoney, that.havePayMoney) &&
                 Objects.equals(transactorId, that.transactorId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(stockId, stockMoney, stockMoneyDate, havepayMoney, transactorId);
+        return Objects.hash(stockId, stockMoney, stockMoneyDate, havePayMoney, transactorId);
     }
 }

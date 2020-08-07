@@ -1,6 +1,10 @@
 package com.janguo.carsystem.service.impl;
 
+import com.janguo.carsystem.dao.SaleAccountListDao;
+import com.janguo.carsystem.dao.StockAccountListDao;
+import com.janguo.carsystem.dao.StockDetailDao;
 import com.janguo.carsystem.domain.OrderDetailEntity;
+import com.janguo.carsystem.domain.StockAccountListEntity;
 import com.janguo.carsystem.domain.StockDetailEntity;
 import com.janguo.carsystem.domain.StockEntity;
 import com.janguo.carsystem.service.StockService;
@@ -10,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DuplicateKeyException;
 
+import javax.annotation.Resource;
 import java.sql.Timestamp;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -62,7 +67,7 @@ class StockServiceImplTest {
         try {
             assertTrue(stockService.addStock(stockEntity,stockDetailEntity));
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -80,5 +85,25 @@ class StockServiceImplTest {
     @Test
     void getAllStockInformation() {
         System.out.println(stockService.getAllStockInformation("1"));
+    }
+
+    @Resource
+    StockAccountListDao stockAccountListDao;
+
+    @Test
+    void addStockAccountList() {
+
+        StockAccountListEntity stockAccountList = new StockAccountListEntity();
+        stockAccountList.setStockId("1");
+        stockAccountList.setStockMoney(1000d);
+        stockAccountList.setStockMoneyDate(new Timestamp(System.currentTimeMillis()));
+        stockAccountList.setHavePayMoney(200d);
+        stockAccountList.setTransactorId("1");
+
+        assertTrue(stockAccountListDao.addStockAccountList(stockAccountList));
+    }
+    @Test
+    void getStockAccountList() {
+        System.out.println(stockAccountListDao.getStockAccountListByStockId("1"));
     }
 }

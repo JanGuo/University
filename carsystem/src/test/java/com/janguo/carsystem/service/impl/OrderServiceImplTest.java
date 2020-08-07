@@ -1,7 +1,10 @@
 package com.janguo.carsystem.service.impl;
 
+import com.janguo.carsystem.dao.SaleAccountListDao;
 import com.janguo.carsystem.domain.OrderDetailEntity;
 import com.janguo.carsystem.domain.OrderEntity;
+import com.janguo.carsystem.domain.SaleAccountListEntity;
+import com.janguo.carsystem.domain.StockAccountListEntity;
 import com.janguo.carsystem.service.OrderService;
 import com.janguo.carsystem.vo.OrderInformation;
 import com.janguo.carsystem.vo.StockInformation;
@@ -9,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -91,4 +95,23 @@ class OrderServiceImplTest {
     }
 
 
+    @Resource
+    SaleAccountListDao saleAccountListDao;
+
+    @Test
+    void addStockAccountList() {
+
+        SaleAccountListEntity saleAccountList = new SaleAccountListEntity();
+        saleAccountList.setOrderId("5");
+        saleAccountList.setOrderMoney(1250d);
+        saleAccountList.setReceiveMoneyDate(new Timestamp(System.currentTimeMillis()));
+        saleAccountList.setReceiveMoney(223d);
+        saleAccountList.setTransactorId("1");
+
+        assertTrue(saleAccountListDao.addSaleAccountList(saleAccountList));
+    }
+    @Test
+    void getStockAccountList() {
+        System.out.println(saleAccountListDao.getSaleAccountListByOrderId("5"));
+    }
 }
