@@ -41,4 +41,8 @@ public interface OrderDetailDao {
     @ResultMap("order_detail")
     @Select("select * from order_detail where order_detail_id=#{id}")
     OrderDetailEntity getByOrderDetailId(String id);
+
+
+    @Select("SELECT count(*)  from order_detail")
+    int getIndex();
 }

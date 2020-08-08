@@ -1,6 +1,5 @@
 package com.janguo.carsystem.dao;
 
-import com.janguo.carsystem.domain.OrderDetailEntity;
 import com.janguo.carsystem.domain.StockDetailEntity;
 import org.apache.ibatis.annotations.*;
 
@@ -39,4 +38,7 @@ public interface StockDetailDao {
     @ResultMap("order_stock")
     @Select("select * from stock_detail where stock_detail_id=#{id}")
     StockDetailEntity getByOrderDetailId(String id);
+
+    @Select("SELECT count(*)  from stock_detail")
+    int getIndex();
 }

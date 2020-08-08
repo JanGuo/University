@@ -4,7 +4,6 @@ import com.janguo.carsystem.domain.DepartmentEntity;
 import com.janguo.carsystem.domain.StaffEntity;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -34,4 +33,10 @@ public interface DepartmentDao {
     @ResultMap("department")
     @Select("select staff_id,staff_name,department_name from staff as s inner join department as dep on s.department_id=#{departmentId}")
     List<StaffEntity> getSomeDepStaffsByDepId(DepartmentEntity department);
+
+
+
+
+    @Select("SELECT count(*)  from department")
+    int getIndex();
 }

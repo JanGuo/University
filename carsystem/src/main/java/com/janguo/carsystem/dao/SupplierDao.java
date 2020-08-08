@@ -32,4 +32,7 @@ public interface SupplierDao {
     @ResultMap("supplier")
     @Select("select * from supplier where supplier_name=#{name}")
     SupplierEntity getSupplierByName(String name);
+
+    @Select("SELECT count(*)  from supplier")
+    int getIndex();
 }

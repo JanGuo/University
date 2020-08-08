@@ -41,4 +41,7 @@ public interface ProductDao {
     @Select("select * from product where in_storage_time<=#{timestamp}")
     List<ProductEntity> getAllProductTimeDownValue(Timestamp timestamp);
 
+
+    @Select("SELECT count(*)  from product")
+    int getIndex();
 }

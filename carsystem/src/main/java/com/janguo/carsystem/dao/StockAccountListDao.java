@@ -1,7 +1,6 @@
 package com.janguo.carsystem.dao;
 
 import com.janguo.carsystem.domain.StockAccountListEntity;
-import com.janguo.carsystem.domain.StockEntity;
 import org.apache.ibatis.annotations.*;
 
 
@@ -35,4 +34,8 @@ public interface StockAccountListDao {
     @Insert("insert into stock_account_list(stock_id,stock_money,stock_money_date,have_pay_money,transactor_id) " +
             "values(#{stockId},#{stockMoney},#{stockMoneyDate},#{havePayMoney},#{transactorId})")
     boolean addStockAccountList(StockAccountListEntity stockAccountListEntity);
+
+
+    @Select("SELECT count(*)  from stock_account_list")
+    int getIndex();
 }

@@ -27,4 +27,8 @@ public interface OrderDao {
     @ResultMap("order")
     @Select("select * from order1 where order_id=#{id}")
     OrderEntity getOlderById(String id);
+
+
+    @Select("SELECT count(*)  from order1")
+    int getIndex();
 }

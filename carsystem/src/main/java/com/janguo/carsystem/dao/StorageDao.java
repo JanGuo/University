@@ -33,4 +33,7 @@ public interface StorageDao {
     @ResultMap("storage")
     @Select("select * from storage where storage_id=#{id}")
     StorageEntity getStorageById(String id);
+
+    @Select("SELECT count(*)  from storage")
+    int getIndex();
 }

@@ -26,4 +26,8 @@ public interface CustomerDao {
     @ResultMap("customer")
     @Select("Select * from customer where customer_address=#{address}")
     List<CustomerEntity> getAllCustomerByAddress(String address);
+
+
+    @Select("SELECT count(*)  from customer")
+    int getIndex();
 }

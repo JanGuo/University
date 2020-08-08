@@ -48,4 +48,8 @@ public interface StockDao {
     @ResultMap("stock")
     @Select("select * from stock where supplier_id=#{supplierId}")
     List<StockEntity> getStockBySupplierId(String supplierId);
+
+
+    @Select("SELECT count(*)  from stock")
+    int getIndex();
 }

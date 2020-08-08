@@ -1,7 +1,6 @@
 package com.janguo.carsystem.dao;
 
 import com.janguo.carsystem.domain.SaleAccountListEntity;
-import com.janguo.carsystem.domain.StockAccountListEntity;
 import org.apache.ibatis.annotations.*;
 
 @Mapper
@@ -33,4 +32,8 @@ public interface SaleAccountListDao {
     @Insert("insert into sale_account_list(order_id,order_money,receive_money_date,receive_money,transactor_id) " +
             "values(#{orderId},#{orderMoney},#{receiveMoneyDate},#{receiveMoney},#{transactorId})")
     boolean addSaleAccountList(SaleAccountListEntity saleAccountListEntity);
+
+
+    @Select("SELECT count(*)  from sale_account_list")
+    int getIndex();
 }

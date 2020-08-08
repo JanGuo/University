@@ -32,4 +32,7 @@ public interface StaffDao {
     @ResultMap("staff")
     @Select("Select * from staff where department_id=#{id}")
     List<StaffEntity> getStaffsByDepartmentId(char id);
+
+    @Select("SELECT count(*)  from staff")
+    int getIndex();
 }
