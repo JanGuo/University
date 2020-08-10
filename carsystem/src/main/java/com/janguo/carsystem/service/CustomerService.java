@@ -10,4 +10,7 @@ public interface CustomerService {
     CustomerEntity getCustomerById(String id);
 
     List<CustomerEntity> getAllCustomerByAddress(String address);
+
+    boolean addCustomer(CustomerEntity customer);
+
 }

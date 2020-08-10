@@ -12,61 +12,61 @@ public class FindIndex {
     @Resource
     CustomerDao customerDao;
 
-    public AtomicInteger customerIndexNow = new AtomicInteger(0);
+    public static AtomicInteger customerIndexNow = new AtomicInteger(0);
 
     @Resource
     DepartmentDao departmentDao;
 
-    public AtomicInteger departmentIndexNow = new AtomicInteger(0);
+    public static AtomicInteger departmentIndexNow = new AtomicInteger(0);
 
     @Resource
     OrderDao orderDao;
 
-    public AtomicInteger orderIndexNow = new AtomicInteger(0);
+    public static AtomicInteger orderIndexNow = new AtomicInteger(0);
 
     @Resource
     OrderDetailDao orderDetailDao;
 
-    public AtomicInteger orderDetailNow = new AtomicInteger(0);
+    public static AtomicInteger orderDetailNow = new AtomicInteger(0);
 
     @Resource
     ProductDao productDao;
 
-    public AtomicInteger productIndexNow = new AtomicInteger(0);
+    public static AtomicInteger productIndexNow = new AtomicInteger(0);
 
     @Resource
     SaleAccountListDao saleAccountListDao;
 
-    public AtomicInteger saleAccountListIndexNow = new AtomicInteger(0);
+    public static AtomicInteger saleAccountListIndexNow = new AtomicInteger(0);
 
     @Resource
     StaffDao staffDao;
 
-    public AtomicInteger staffIndexNow = new AtomicInteger(0);
+    public static AtomicInteger staffIndexNow = new AtomicInteger(0);
 
     @Resource
     StockAccountListDao stockAccountListDao;
 
-    public AtomicInteger stockAccountListIndexNow = new AtomicInteger(0);
+    public static AtomicInteger stockAccountListIndexNow = new AtomicInteger(0);
 
     @Resource
     StockDao stockDao;
 
-    public AtomicInteger stockIndexNow = new AtomicInteger(0);
+    public static AtomicInteger stockIndexNow = new AtomicInteger(0);
     @Resource
     StockDetailDao stockDetailDao;
 
-    public AtomicInteger stockDetailIndexNow = new AtomicInteger(0);
+    public static AtomicInteger stockDetailIndexNow = new AtomicInteger(0);
 
     @Resource
     StorageDao storageDao;
 
-    public AtomicInteger storageIndexNow = new AtomicInteger(0);
+    public static AtomicInteger storageIndexNow = new AtomicInteger(0);
 
     @Resource
     SupplierDao supplierDao;
 
-    public AtomicInteger supplierIndexNow = new AtomicInteger(0);
+    public static AtomicInteger supplierIndexNow = new AtomicInteger(0);
 
     public void getIndex() {
 

@@ -1,6 +1,5 @@
 package com.janguo.carsystem.config;
 
-import com.janguo.carsystem.domain.IndexKeyNumber;
 import com.janguo.carsystem.vo.index.FindIndex;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +18,5 @@ public class AllDateBaseKeyNumberConfig {
         // TODO
         // 测试是否单例， index是否线程安全
         findIndex.getIndex();
-
     }
 }

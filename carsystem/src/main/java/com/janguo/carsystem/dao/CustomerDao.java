@@ -7,14 +7,14 @@ import java.util.List;
 
 @Mapper
 public interface CustomerDao {
-    @Results(id = "customer",value = {
-            @Result(property = "customerId",column = "customer_id"),
-            @Result(property = "customerName",column = "customer_name"),
-            @Result(property = "customerAddress",column = "customer_address"),
-            @Result(property = "customerTel",column = "customer_tel"),
-            @Result(property = "customerBank",column = "customer_bank"),
-            @Result(property = "customerBankId",column = "customer_bank_id"),
-            @Result(property = "customerRemark",column = "customer_remark")
+    @Results(id = "customer", value = {
+            @Result(property = "customerId", column = "customer_id"),
+            @Result(property = "customerName", column = "customer_name"),
+            @Result(property = "customerAddress", column = "customer_address"),
+            @Result(property = "customerTel", column = "customer_tel"),
+            @Result(property = "customerBank", column = "customer_bank"),
+            @Result(property = "customerBankId", column = "customer_bank_id"),
+            @Result(property = "customerRemark", column = "customer_remark")
     })
     @Select("select * from customer")
     List<CustomerEntity> getAllCustomer();
@@ -22,6 +22,11 @@ public interface CustomerDao {
     @ResultMap("customer")
     @Select("Select * from customer where customer_id=#{id}")
     CustomerEntity getCustomerById(String id);
+
+    @ResultMap("customer")
+    @Insert("insert into customer(customer_id,customer_name,customer_address,customer_tel,customer_bank,customer_bank_id,customer_remark) " +
+            "values(#{customerId},#{customerName},#{customerAddress},#{customerTel},#{customerBank},#{customerBankId},#{customerRemark})")
+    boolean addCustomer(CustomerEntity customer);
 
     @ResultMap("customer")
     @Select("Select * from customer where customer_address=#{address}")

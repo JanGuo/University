@@ -28,4 +28,9 @@ public class CustomerServiceImpl implements CustomerService {
     public List<CustomerEntity> getAllCustomerByAddress(String address) {
         return customerDao.getAllCustomerByAddress(address);
     }
+
+    @Override
+    public boolean addCustomer(CustomerEntity customer) {
+        return customerDao.addCustomer(customer);
+    }
 }

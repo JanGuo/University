@@ -1,11 +1,10 @@
 package com.janguo.carsystem.domain;
 
+import com.janguo.carsystem.vo.index.FindIndex;
 import lombok.Data;
 
 import java.util.Objects;
 
-@javax.persistence.Entity
-@javax.persistence.Table(name = "customer", schema = "carsystem", catalog = "")
 @Data
 public class CustomerEntity {
     // 顾客编号
@@ -23,74 +22,52 @@ public class CustomerEntity {
     // 顾客备注
     private String customerRemark;
 
-    @javax.persistence.Id
-    @javax.persistence.Column(name = "customer_id")
-    public String getCustomerId() {
-        return customerId;
+
+    public static class Builder {
+        private String customerId;
+
+        private String customerName;
+        private String customerAddress = "";
+        private String customerTel;
+        private String customerBank;
+        private String customerBankId;
+
+        private String customerRemark = "";
+
+
+        public Builder(String customerName, String customerTel, String customerBank, String customerBankId) {
+            this.customerId = String.valueOf(FindIndex.customerIndexNow.incrementAndGet());
+            this.customerName = customerName;
+            this.customerTel = customerTel;
+            this.customerBank = customerBank;
+            this.customerBankId = customerBankId;
+        }
+
+        public Builder setAddress(String address) {
+            this.customerAddress = address;
+            return this;
+        }
+
+        public Builder setRemark(String remark) {
+            this.customerRemark = remark;
+            return this;
+        }
+
+        public CustomerEntity build(){
+            return new CustomerEntity(this);
+        }
+
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
 
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "customer_name")
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "customer_address")
-    public String getCustomerAddress() {
-        return customerAddress;
-    }
-
-    public void setCustomerAddress(String customerAddress) {
-        this.customerAddress = customerAddress;
-    }
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "customer_tel")
-    public String getCustomerTel() {
-        return customerTel;
-    }
-
-    public void setCustomerTel(String customerTel) {
-        this.customerTel = customerTel;
-    }
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "customer_bank")
-    public String getCustomerBank() {
-        return customerBank;
-    }
-
-    public void setCustomerBank(String customerBank) {
-        this.customerBank = customerBank;
-    }
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "customer_bank_id")
-    public String getCustomerBankId() {
-        return customerBankId;
-    }
-
-    public void setCustomerBankId(String customerBankId) {
-        this.customerBankId = customerBankId;
-    }
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "customer_remark")
-    public String getCustomerRemark() {
-        return customerRemark;
-    }
-
-    public void setCustomerRemark(String customerRemark) {
-        this.customerRemark = customerRemark;
+    private CustomerEntity(Builder customerBuilder) {
+        this.customerId = customerBuilder.customerId;
+        this.customerName = customerBuilder.customerName;
+        this.customerAddress = customerBuilder.customerAddress;
+        this.customerTel = customerBuilder.customerTel;
+        this.customerBank = customerBuilder.customerBank;
+        this.customerBankId = customerBuilder.customerBankId;
+        this.customerRemark = customerBuilder.customerRemark;
     }
 
     @Override
