@@ -9,23 +9,22 @@ import org.springframework.boot.test.context.SpringBootTest;
 class CarsystemApplicationTests {
 
 
-    @Autowired
-    FindIndex findIndex;
+
 
     @Test
     void testFindIndex() {
 
-        System.out.println("customerIndexNow            --- " + findIndex.customerIndexNow);
-        System.out.println("departmentIndexNow          --- " + findIndex.departmentIndexNow);
-        System.out.println("orderIndexNow               --- " + findIndex.orderIndexNow);
-        System.out.println("orderDetailNow              --- " + findIndex.orderDetailNow);
-        System.out.println("productIndexNow             --- " + findIndex.productIndexNow);
-        System.out.println("saleAccountListIndexNow     --- " + findIndex.saleAccountListIndexNow);
-        System.out.println("staffIndexNow               --- " + findIndex.staffIndexNow);
-        System.out.println("stockAccountListIndexNow    --- " + findIndex.stockAccountListIndexNow);
-        System.out.println("stockIndexNow               --- " + findIndex.stockIndexNow);
-        System.out.println("stockDetailIndexNow         --- " + findIndex.stockDetailIndexNow);
-        System.out.println("storageIndexNow             --- " + findIndex.storageIndexNow);
-        System.out.println("supplierIndexNow            --- " + findIndex.supplierIndexNow);
+        System.out.println("customerIndexNow            --- " + FindIndex.customerIndexNow);
+        System.out.println("departmentIndexNow          --- " + FindIndex.departmentIndexNow);
+        System.out.println("orderIndexNow               --- " + FindIndex.orderIndexNow);
+        System.out.println("orderDetailNow              --- " + FindIndex.orderDetailNow);
+        System.out.println("productIndexNow             --- " + FindIndex.productIndexNow);
+        System.out.println("saleAccountListIndexNow     --- " + FindIndex.saleAccountListIndexNow);
+        System.out.println("staffIndexNow               --- " + FindIndex.staffIndexNow);
+        System.out.println("stockAccountListIndexNow    --- " + FindIndex.stockAccountListIndexNow);
+        System.out.println("stockIndexNow               --- " + FindIndex.stockIndexNow);
+        System.out.println("stockDetailIndexNow         --- " + FindIndex.stockDetailIndexNow);
+        System.out.println("storageIndexNow             --- " + FindIndex.storageIndexNow);
+        System.out.println("supplierIndexNow            --- " + FindIndex.supplierIndexNow);
     }
 }
