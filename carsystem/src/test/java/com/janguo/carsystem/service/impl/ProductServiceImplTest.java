@@ -64,4 +64,11 @@ class ProductServiceImplTest {
         Date date = Date.from(instant);
         System.out.println(productService.getAllProductTimeDownValue(new Timestamp(date.getTime())));
     }
+
+    @Test
+    void testProductBuilder() {
+        ProductEntity product = new ProductEntity.Builder("Z轴承", 10, 200D, new Timestamp(System.currentTimeMillis())).build();
+
+        assertTrue(productService.addProduct(product));
+    }
 }

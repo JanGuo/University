@@ -1,12 +1,12 @@
 package com.janguo.carsystem.domain;
 
+import com.janguo.carsystem.vo.index.FindIndex;
 import lombok.Data;
 
 import java.sql.Timestamp;
 import java.util.Objects;
 
-@javax.persistence.Entity
-@javax.persistence.Table(name = "product", schema = "carsystem", catalog = "")
+
 @Data
 public class ProductEntity {
     // 产品编号
@@ -20,54 +20,42 @@ public class ProductEntity {
     // 入库时间
     private Timestamp inStorageTime;
 
-    @javax.persistence.Id
-    @javax.persistence.Column(name = "product_id")
-    public String getProductId() {
-        return productId;
+    public static class Builder {
+        private String productId;
+
+        private String productName;
+        private Integer productNumber;
+        private Double productPrice;
+        private Timestamp inStorageTime;
+
+
+
+        public Builder(String productName, Integer productNumber, Double productPrice, Timestamp inStorageTime) {
+            this.productId = String.valueOf(FindIndex.productIndexNow.incrementAndGet());
+            this.productName = productName;
+            this.productNumber = productNumber;
+            this.productPrice = productPrice;
+            this.inStorageTime = inStorageTime;
+        }
+
+
+
+        public ProductEntity build(){
+            return new ProductEntity(this);
+        }
+
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+
+    private ProductEntity(ProductEntity.Builder customerBuilder) {
+        this.productId = customerBuilder.productId;
+        this.productName = customerBuilder.productName;
+        this.productNumber = customerBuilder.productNumber;
+        this.productPrice = customerBuilder.productPrice;
+        this.inStorageTime = customerBuilder.inStorageTime;
     }
 
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "product_name")
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "product_number")
-    public Integer getProductNumber() {
-        return productNumber;
-    }
-
-    public void setProductNumber(Integer productNumber) {
-        this.productNumber = productNumber;
-    }
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "product_price")
-    public Double getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(Double productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "in_storage_time")
-    public Timestamp getInStorageTime() {
-        return inStorageTime;
-    }
-
-    public void setInStorageTime(Timestamp inStorageTime) {
-        this.inStorageTime = inStorageTime;
+    public ProductEntity() {
     }
 
     @Override
