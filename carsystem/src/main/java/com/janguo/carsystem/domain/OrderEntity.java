@@ -1,12 +1,11 @@
 package com.janguo.carsystem.domain;
 
+import com.janguo.carsystem.vo.index.FindIndex;
 import lombok.Data;
 
 import java.sql.Timestamp;
 import java.util.Objects;
 
-@javax.persistence.Entity
-@javax.persistence.Table(name = "order", schema = "carsystem", catalog = "")
 @Data
 public class OrderEntity {
     // 订单编号
@@ -24,75 +23,49 @@ public class OrderEntity {
     // 应收金额
     private Double orderMoney;
 
-    @javax.persistence.Id
-    @javax.persistence.Column(name = "order_id")
-    public String getOrderId() {
-        return orderId;
+
+    public static class Builder {
+        private String orderId;
+
+        private String customerId;
+        private String orderDetail;
+        private Timestamp orderDate;
+        private Timestamp deliveryDate;
+        private String transactorId;
+
+        private Double orderMoney;
+
+
+        public Builder(String customerId, String orderDetail, Timestamp orderDate, Timestamp deliveryDate, String transactorId, Double orderMoney) {
+            this.orderId = String.valueOf(FindIndex.orderIndexNow.incrementAndGet());
+            this.customerId = customerId;
+            this.orderDetail = orderDetail;
+            this.orderDate = orderDate;
+            this.deliveryDate = deliveryDate;
+            this.transactorId = transactorId;
+            this.orderMoney = orderMoney;
+        }
+
+        public OrderEntity build() {
+            return new OrderEntity(this);
+        }
+
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+
+    public OrderEntity() {
     }
 
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "customer_id")
-    public String getCustomerId() {
-        return customerId;
+    private OrderEntity(Builder builder) {
+        this.orderId = builder.orderId;
+        this.customerId = builder.customerId;
+        this.orderDetail = builder.orderDetail;
+        this.orderDate = builder.orderDate;
+        this.deliveryDate = builder.deliveryDate;
+        this.transactorId = builder.transactorId;
+        this.orderMoney = builder.orderMoney;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "order_detail")
-    public String getOrderDetail() {
-        return orderDetail;
-    }
-
-    public void setOrderDetail(String orderDetail) {
-        this.orderDetail = orderDetail;
-    }
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "order_date")
-    public Timestamp getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Timestamp orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "delivery_date")
-    public Timestamp getDeliveryDate() {
-        return deliveryDate;
-    }
-
-    public void setDeliveryDate(Timestamp deliveryDate) {
-        this.deliveryDate = deliveryDate;
-    }
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "transactor_id")
-    public String getTransactorId() {
-        return transactorId;
-    }
-
-    public void setTransactorId(String transactorId) {
-        this.transactorId = transactorId;
-    }
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "order_money")
-    public Double getOrderMoney() {
-        return orderMoney;
-    }
-
-    public void setOrderMoney(Double orderMoney) {
-        this.orderMoney = orderMoney;
-    }
 
     @Override
     public boolean equals(Object o) {

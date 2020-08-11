@@ -11,6 +11,12 @@ public interface OrderService {
 
     boolean addOrderAndDetail(OrderEntity orderEntity, OrderDetailEntity orderDetailEntity);
 
+    /**
+     * add Order and OrderDetail
+     * @param orderInformation 由Order和OrderDetail封装的对象
+     * @param orderDetailId orderDetailId 的 ID值
+     * @return
+     */
     boolean addOrderAndDetail(OrderInformation orderInformation, String orderDetailId);
 
     OrderInformation getOrderAndDetailById(String id);

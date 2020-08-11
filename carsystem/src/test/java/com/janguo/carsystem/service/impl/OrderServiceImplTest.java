@@ -8,6 +8,7 @@ import com.janguo.carsystem.domain.StockAccountListEntity;
 import com.janguo.carsystem.service.OrderService;
 import com.janguo.carsystem.vo.OrderInformation;
 import com.janguo.carsystem.vo.StockInformation;
+import com.janguo.carsystem.vo.index.FindIndex;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -110,8 +111,21 @@ class OrderServiceImplTest {
 
         assertTrue(saleAccountListDao.addSaleAccountList(saleAccountList));
     }
+
     @Test
     void getStockAccountList() {
         System.out.println(saleAccountListDao.getSaleAccountListByOrderId("5"));
+    }
+
+    @Test
+    void testOrderBuilder() {
+        OrderEntity orderEntity = new OrderEntity.Builder("4", "1", new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()), "10", 2054d)
+                .build();
+
+        OrderDetailEntity orderDetailEntity = new OrderDetailEntity.Builder(orderEntity.getOrderId(), "4", 12, orderEntity.getOrderMoney()).build();
+
+        OrderInformation orderInformation = new OrderInformation(orderEntity, orderDetailEntity);
+
+        orderService.addOrderAndDetail(orderInformation,String.valueOf(FindIndex.orderDetailIndexNow.incrementAndGet()));
     }
 }

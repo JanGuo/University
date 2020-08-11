@@ -1,14 +1,14 @@
 package com.janguo.carsystem.domain;
 
+import com.janguo.carsystem.vo.index.FindIndex;
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.util.Objects;
 
 /**
  * 订单细节
  */
-@javax.persistence.Entity
-@javax.persistence.Table(name = "order_detail", schema = "carsystem", catalog = "")
 @Data
 public class OrderDetailEntity {
 
@@ -23,44 +23,41 @@ public class OrderDetailEntity {
     // 订单总价值
     private Double orderMoney;
 
-    @javax.persistence.Id
-    @javax.persistence.Column(name = "order_id")
-    public String getOrderId() {
-        return orderId;
+    public static class Builder {
+        private String orderDetailId;
+
+        private String orderId;
+        private String productId;
+
+        private Integer orderNumber;
+
+        private Double orderMoney;
+
+
+        public Builder(String orderId, String productId, Integer orderNumber , Double orderMoney) {
+            this.orderDetailId = String.valueOf(FindIndex.orderDetailIndexNow.incrementAndGet());
+            this.orderId = orderId;
+            this.productId = productId;
+            this.orderNumber = orderNumber;
+            this.orderMoney = orderMoney;
+        }
+
+        public OrderDetailEntity build() {
+            return new OrderDetailEntity(this);
+        }
+
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+
+    public OrderDetailEntity() {
     }
 
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "product_id")
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "order_number")
-    public Integer getOrderNumber() {
-        return orderNumber;
-    }
-
-    public void setOrderNumber(Integer orderNumber) {
-        this.orderNumber = orderNumber;
-    }
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "order_money")
-    public Double getOrderMoney() {
-        return orderMoney;
-    }
-
-    public void setOrderMoney(Double orderMoney) {
-        this.orderMoney = orderMoney;
+    private OrderDetailEntity(Builder builder) {
+        this.orderDetailId = builder.orderDetailId;
+        this.orderId = builder.orderId;
+        this.productId = builder.productId;
+        this.orderNumber = builder.orderNumber;
+        this.orderMoney = builder.orderMoney;
     }
 
     @Override

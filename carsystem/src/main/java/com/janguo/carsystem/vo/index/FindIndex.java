@@ -27,7 +27,7 @@ public class FindIndex {
     @Resource
     OrderDetailDao orderDetailDao;
 
-    public static AtomicInteger orderDetailNow = new AtomicInteger(0);
+    public static AtomicInteger orderDetailIndexNow = new AtomicInteger(0);
 
     @Resource
     ProductDao productDao;
@@ -73,7 +73,7 @@ public class FindIndex {
         customerIndexNow.set(customerDao.getIndex());
         departmentIndexNow.set(departmentDao.getIndex());
         orderIndexNow.set(orderDao.getIndex());
-        orderDetailNow.set(orderDetailDao.getIndex());
+        orderDetailIndexNow.set(orderDetailDao.getIndex());
         productIndexNow.set(productDao.getIndex());
         saleAccountListIndexNow.set(saleAccountListDao.getIndex());
         staffIndexNow.set(staffDao.getIndex());
