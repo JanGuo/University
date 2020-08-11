@@ -19,6 +19,7 @@ class DepartmentServiceImplTest {
     DepartmentService departmentService;
     @Autowired
     StaffService staffService;
+
     @Test
     void testGetAllDepartment() {
         System.out.println(departmentService.getAllDepartment());
@@ -61,4 +62,9 @@ class DepartmentServiceImplTest {
 
     }
 
+    @Test
+    void testDepartmentBuilder() {
+        DepartmentEntity departmentEntity = new DepartmentEntity.Builder("阿里巴巴", 1200, "maYun").build();
+        assertTrue(departmentService.addDepartment(departmentEntity));
+    }
 }
